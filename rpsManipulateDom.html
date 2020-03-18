@@ -2,34 +2,102 @@
 <html>
 <head>
 	<title>Rock, Paper, Scissors</title>
+	<style>
+		h1{
+			font-size: 52pt;
+			text-align: center;
+			line-height: 50%;
+			margin-top:70px;
+		}
+		#cont{
+			width:500px;
+			text-align: center;
+			margin:auto;
+			background-color: #c7d6ae;
+			padding:50px;
+			font-size: 130%;
+
+		}
+		button{
+			width: 100px;
+			height:30px;
+			border-radius: 20px;
+			border-style: none;
+			margin:10px;
+			font-size: 85%;
+		}
+		h4{
+			line-height: 50%;
+		}
+		#wrapper div{
+			float: left;
+			width: 200px;
+			height:200px;
+			margin:10px;
+		}
+		#wrapper{
+			width: 450px;
+			margin:auto;
+		}
+		#footer{
+			text-align: center;
+			margin:50px;
+		}
+		.clear{
+			clear: both;
+		}
+
+
+	</style>
 </head>
 <body>
 	<h1>Rock Paper Scissors</h1>
 
-	<h2>Please select your choice:</h2>
-	<button id="rock">Rock</button>
-	<button id="paper">Paper</button>
-	<button id="scissors">Scissors</button>
+	
+	<div id="cont">
+		<h2>Please select your choice:</h2>
+		<button id="rock">Rock</button>
+		<button id="paper">Paper</button>
+		<button id="scissors">Scissors</button>
+		<div id="wrapper">
+			<div>
+				Your choice:
+				<img id="playerimg" src="img/start.png" alt="player choice">
+			</div>
+			<div>
+				Computer choice:
+				<img id="compimg" src="img/start.png" alt="computer choice">
+			</div>
+		</div>
+		<div class="clear"></div>
 
+	</div>
+	<div id="footer">
+		Lauren Tsai &copy; 2020
+	<div>
 	<script type="text/javascript">
 		function computerPlay()
 		{
 			let choices= ["rock", "paper", "scissors"];
-			return choices[Math.floor(Math.random()*3)];
+			let compchoice=choices[Math.floor(Math.random()*3)];;
+			document.getElementById("compimg").src="img/"+compchoice+".png";
+			return compchoice;
 		}
 		function playRound()
 		{
 			let playerSelection=this.id.toLowerCase();
+			document.getElementById("playerimg").src="img/"+playerSelection+".png";
 			let computerSelection= computerPlay();
 			var message;
 
 			if(playerSelection==computerSelection)
 			{
-				return "Tie!";
+				message= "Tie!";
 			}
 
 			if(playerSelection=="rock")
 			{
+				document.getElementById("player")
 				switch(computerSelection)
 				{
 					case "paper":
@@ -71,27 +139,38 @@
 				}
 			}
 
-			mess.textContent="The computer chose: "+computerSelection+". "+message;
-			theScoreP.textContent="Player Score: "+scoreP;
+			mess.textContent=message;
+			theScoreP.textContent="Your Score: "+scoreP;
 			theScoreC.textContent="Computer Score: "+scoreC;
-
 			if(scoreP>=5)
 			{
 				alert('You Win!!');
+				reset();
 			}
 			else if(scoreC>=5)
 			{
 				alert("Computer Wins!!");
+				reset();
 			}
 		}
-		const body= document.querySelector('body');
+		function reset(){
+			scoreP=0;
+			scoreC=0;
+			mess.textContent="";
+			theScoreP.textContent="Your Score: "+scoreP;
+			theScoreC.textContent="Computer Score: "+scoreC;
+			document.getElementById("playerimg").src="img/start.png";
+			document.getElementById("compimg").src="img/start.png";
+
+		}
+		const body= document.querySelector('div');
 		const mess= document.createElement('div');
-		body.appendChild(mess);
+		body.appendChild(mess)
 		var scoreP=0;
 		var scoreC=0;
 		const theScoreP=document.createElement('h4');
 		const theScoreC=document.createElement('h4');
-		theScoreP.textContent="Player Score: "+scoreP;
+		theScoreP.textContent="Your Score: "+scoreP;
 		theScoreC.textContent="Computer Score: "+scoreC;
 		body.appendChild(theScoreP);
 		body.appendChild(theScoreC);
