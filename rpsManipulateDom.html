@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rock, Paper, Scissors</title>
+</head>
+<body>
+	<h1>Rock Paper Scissors</h1>
+
+	<h2>Please select your choice:</h2>
+	<button id="rock">Rock</button>
+	<button id="paper">Paper</button>
+	<button id="scissors">Scissors</button>
+
+	<script type="text/javascript">
+		function computerPlay()
+		{
+			let choices= ["rock", "paper", "scissors"];
+			return choices[Math.floor(Math.random()*3)];
+		}
+		function playRound()
+		{
+			let playerSelection=this.id.toLowerCase();
+			let computerSelection= computerPlay();
+			var message;
+
+			if(playerSelection==computerSelection)
+			{
+				return "Tie!";
+			}
+
+			if(playerSelection=="rock")
+			{
+				switch(computerSelection)
+				{
+					case "paper":
+						message= "You Lose! Paper beats Rock!";
+						scoreC++;
+						break;
+					case "scissors":
+						message= "You Win! Rock beats Scissors!";
+						scoreP++;
+						break;
+				}
+			}
+			else if(playerSelection=="paper")
+			{
+				switch(computerSelection)
+				{
+					case "rock":
+						message= "You Win! Paper beats Rock!";
+						scoreP++;
+						break;
+					case "scissors":
+						message= "You Lose! Scissors beats Paper!";
+						scoreC++;
+						break;
+				}
+			}
+			else 
+			{
+				switch(computerSelection)
+				{
+					case "rock":
+						message= "You Lose! Rock beats Scissors!";
+						scoreC++;
+						break;
+					case "paper":
+						message= "You Win! Scissors beats Paper!";
+						scoreP++;
+						break;
+				}
+			}
+
+			mess.textContent="The computer chose: "+computerSelection+". "+message;
+			theScoreP.textContent="Player Score: "+scoreP;
+			theScoreC.textContent="Computer Score: "+scoreC;
+
+			if(scoreP>=5)
+			{
+				alert('You Win!!');
+			}
+			else if(scoreC>=5)
+			{
+				alert("Computer Wins!!");
+			}
+		}
+		const body= document.querySelector('body');
+		const mess= document.createElement('div');
+		body.appendChild(mess);
+		var scoreP=0;
+		var scoreC=0;
+		const theScoreP=document.createElement('h4');
+		const theScoreC=document.createElement('h4');
+		theScoreP.textContent="Player Score: "+scoreP;
+		theScoreC.textContent="Computer Score: "+scoreC;
+		body.appendChild(theScoreP);
+		body.appendChild(theScoreC);
+		const buttons= document.querySelectorAll('button');
+		buttons.forEach((button)=> { button.addEventListener('click', playRound)});
+		
+
+	</script>
+
+</body>
+</html>
